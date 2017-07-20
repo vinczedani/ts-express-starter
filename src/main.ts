@@ -1,5 +1,11 @@
-import * as express from 'express';
+import { Server } from './server';
+import { config } from './config';
+import { logger } from './utils/logger';
 
-const app = express();
+const server = Server.bootstrap();
 
-console.log('hello');
+const port = config.get('port');
+
+server.app.listen(port, () => {
+  logger.info(`Server started on port: ${port}`);
+});
